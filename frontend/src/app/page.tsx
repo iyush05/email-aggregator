@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { EmailList } from "@/components/EmailList";
 import { SearchBar } from "@/components/SearchBar";
 import { Filters } from "@/components/Filters";
+import { Suspense } from "react";
 
 export default function Home() {
   const [emails, setEmails] = useState<any[]>([]);
@@ -96,7 +97,8 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6 text-black">
+    <Suspense>
+      <main className="min-h-screen bg-gray-50 p-6 text-black">
       <h1 className="text-2xl font-bold mb-6">📨 Email Onebox</h1>
 
       {error && (
@@ -124,5 +126,6 @@ export default function Home() {
         <EmailList emails={emails} />
       )}
     </main>
+    </Suspense>
   );
 }
