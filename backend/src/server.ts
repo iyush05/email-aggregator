@@ -10,6 +10,12 @@ import authRoutes from "./routes/auth";
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://email-aggregator-ruddy.vercel.app/',
+  'https://email-aggregator-ruddy.vercel.app'
+];
+
 app.use(
     cors({
         origin: "http://localhost:3000",
