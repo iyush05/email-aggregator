@@ -42,7 +42,7 @@ router.get("/google/callback", async (req, res) => {
 
         const userEmail = profileRes.data.email;
 
-        res.redirect(`http://localhost:3000?token=${encodeURIComponent(access_token)}&email=${encodeURIComponent(userEmail)}`);
+        res.redirect(`https://email-aggregator-ruddy.vercel.app/?token=${encodeURIComponent(access_token)}&email=${encodeURIComponent(userEmail)}`);
 
     } catch (err) {
         console.error("OAuth token exchange failed:", err);
