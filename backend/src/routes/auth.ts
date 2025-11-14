@@ -3,8 +3,9 @@ import axios from "axios";
 import 'dotenv/config';
 const router = express.Router();
 
+const BACKEND_URL = process.env.BACKEND_URL;
 router.get("/google", (req, res) => {
-    const redirect_uri = "http://localhost:4000/auth/google/callback";
+    const redirect_uri = `${BACKEND_URL}/auth/google/callback`;
     const client_id = process.env.GOOGLE_CLIENT_ID;
       const scope = [
     "openid",
@@ -19,6 +20,7 @@ router.get("/google", (req, res) => {
 });
 
 router.get("/google/callback", async (req, res) => {
+
     try { 
         const code = req.query.code;
         if (!code) return res.status(400).send("Missing code");
@@ -26,7 +28,7 @@ router.get("/google/callback", async (req, res) => {
             params.append("code", code);
             params.append("client_id", process.env.GOOGLE_CLIENT_ID!);
             params.append("client_secret", process.env.CLIENT_SECRET!);
-            params.append("redirect_uri", "http://localhost:4000/auth/google/callback");
+            params.append("redirect_uri", `${BACKEND_URL}/auth/google/callback`);
             params.append("grant_type", "authorization_code");
 
         const tokenRes = await axios.post("https://oauth2.googleapis.com/token", params.toString(), {
